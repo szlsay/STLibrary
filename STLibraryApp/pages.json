@@ -1,10 +1,29 @@
 {
 	"pages": [{
-		"path" : "pages/home/home",
-		"style" : 
-		{
-			"navigationBarTitleText" : "",
-			"enablePullDownRefresh" : false
+		"path": "pages/book/list",
+		"style": {
+			"navigationBarTitleText": "列表"
+		}
+	}, {
+		"path": "pages/home/home",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+	}, {
+		"path": "pages/book/add",
+		"style": {
+			"navigationBarTitleText": "新增"
+		}
+	}, {
+		"path": "pages/book/edit",
+		"style": {
+			"navigationBarTitleText": "编辑"
+		}
+	}, {
+		"path": "pages/book/detail",
+		"style": {
+			"navigationBarTitleText": "详情"
 		}
 	}],
 	"globalStyle": {

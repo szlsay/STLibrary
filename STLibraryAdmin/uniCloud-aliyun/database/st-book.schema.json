@@ -1,0 +1,86 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"author": {
+			"bsonType": "string",
+			"description": "请输入作者",
+			"label": "作者"
+		},
+		"bookDesc": {
+			"bsonType": "string",
+			"description": "请输入内容介绍",
+			"label": "内容介绍"
+		},
+		"bookName": {
+			"bsonType": "string",
+			"description": "请输入书名",
+			"label": "书名"
+		},
+		"clcCode": {
+			"bsonType": "string",
+			"description": "请输入类型编码",
+			"label": "类型编码"
+		},
+		"clcName": {
+			"bsonType": "string",
+			"description": "请输入类型名称",
+			"label": "类型名称"
+		},
+		"isbn": {
+			"bsonType": "string",
+			"description": "请输入ISBN",
+			"label": "ISBN"
+		},
+		"language": {
+			"bsonType": "string",
+			"description": "请输入语言",
+			"label": "语言"
+		},
+		"pages": {
+			"bsonType": "string",
+			"description": "请输入页数",
+			"label": "页数"
+		},
+		"pictures": {
+			"bsonType": "string",
+			"description": "请输入图片",
+			"label": "图片"
+		},
+		"press": {
+			"bsonType": "string",
+			"description": "请输入出版社",
+			"label": "出版社"
+		},
+		"pressDate": {
+			"bsonType": "string",
+			"description": "请输入出版时间",
+			"label": "出版时间"
+		},
+		"pressPlace": {
+			"bsonType": "string",
+			"description": "请输入出版地址",
+			"label": "出版地址"
+		},
+		"price": {
+			"bsonType": "double",
+			"description": "请输入价格",
+			"label": "价格"
+		},
+		"words": {
+			"bsonType": "string",
+			"description": "请输入字数",
+			"label": "字数"
+		}
+	}
+}
