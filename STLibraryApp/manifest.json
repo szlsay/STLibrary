@@ -71,6 +71,9 @@
     "h5" : {
         "router" : {
             "base" : "/stlibraryapp"
+        },
+        "devServer" : {
+            "https" : false
         }
     }
 }
