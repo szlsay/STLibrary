@@ -1,19 +1,24 @@
 {
 	"pages": [{
+		"path": "pages/home/home",
+		"style": {
+			"navigationBarTitleText": "首页",
+			"enablePullDownRefresh": false
+		}
+	}, {
 		"path": "pages/book/list",
 		"style": {
 			"navigationBarTitleText": "列表"
 		}
 	}, {
-		"path": "pages/home/home",
-		"style": {
-			"navigationBarTitleText": "",
-			"enablePullDownRefresh": false
-		}
-	}, {
 		"path": "pages/book/add",
 		"style": {
 			"navigationBarTitleText": "新增"
+		}
+	}, {
+		"path": "pages/book/addauto",
+		"style": {
+			"navigationBarTitleText": "自动新增"
 		}
 	}, {
 		"path": "pages/book/edit",
@@ -27,12 +32,9 @@
 		}
 	}],
 	"globalStyle": {
-		"h5": {
-			"titleNView": false
-		},
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-starter",
-		"navigationBarBackgroundColor": "#FFFFFF",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#00CC99",
 		"backgroundColor": "#F8F8F8",
 		"enablePullDownRefresh": false,
 		"rpxCalcMaxDeviceWidth": 375,
