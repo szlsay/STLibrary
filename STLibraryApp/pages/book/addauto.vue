@@ -5,7 +5,6 @@
 				<uni-easyinput placeholder="请输入13位的ISBN~" maxlength="13" v-model="isbn" trim="both"></uni-easyinput>
 				<button type="primary" @click="search" style="width: 20%;">查询</button>
 			</view>
-
 		</view>
 		<view class="page-result" v-if="formData">
 			<uni-forms ref="form" :model="formData" validate-trigger="submit" err-show-type="toast" :label-width='40'>
