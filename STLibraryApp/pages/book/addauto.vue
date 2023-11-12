@@ -41,7 +41,7 @@
 					<uni-easyinput placeholder="请输入出版地址" v-model="formData.pressPlace" disabled></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="pictures" label="图片">
-					<image v-for="(url, index) in getImageUrls(formData.pictures)" :key="index" :src="url" mode="aspectFill"
+					<image v-for="(url, index) in formData.pictures" :key="index" :src="url" mode="aspectFill"
 						@tap.native.stop="onClickPreview(url)"></image>
 				</uni-forms-item>
 				<view class="uni-button-group">
@@ -73,13 +73,14 @@
 	export default {
 		data() {
 			let formData = {
+				"isisbn": true,
 				"author": "",
 				"bookDesc": "",
 				"bookName": "",
 				"clcCode": "",
 				"clcName": "",
 				"isbn": "",
-				"pictures": "",
+				"pictures": [],
 				"press": "",
 				"pressDate": "",
 				"pressPlace": "",
@@ -98,14 +99,18 @@
 			// this.getDetail()
 		},
 		methods: {
-			getImageUrls(value) {
-				if (value) {
-					const result = JSON.parse(value);
-					if (result && Array.isArray(result) && result.length > 0) {
-						return result
-					}
-				}
-				return []
+			getDetail() {
+				uniCloud.database().collection(dbCollectionName).where({
+					isbn: this.isbn
+				}).get({
+					getOne: true
+				}).then(res => {
+					const {
+						result
+					} = res
+					console.log(result)
+					this.formData = result.data
+				})
 			},
 			onClickPreview(url) {
 				event.preventDefault()
@@ -124,21 +129,8 @@
 					uni.hideLoading()
 				})
 			},
-			getDetail() {
-				uniCloud.database().collection(dbCollectionName).where({
-					isbn: this.isbn
-				}).get({
-					getOne: true
-				}).then(res => {
-					const {
-						result
-					} = res
-					console.log(result)
-					this.formData = result.data
-				})
-			},
 			submitForm(value) {
-				// 使用 clientDB 提交数据
+				value.isisbn = true
 				return db.collection(dbCollectionName).add(value).then((res) => {
 					uni.showToast({
 						icon: 'none',
@@ -166,7 +158,19 @@
 								data
 							} = res
 							if (data && data.data) {
-								this.formData = data.data
+								let tempData = data.data
+								if (tempData.pictures) {
+									const result = JSON.parse(tempData.pictures);
+									if (result && Array.isArray(result) && result.length > 0) {
+										tempData.pictures = result.map(item => {
+											if (item.indexOf('douban') != -1) {
+												item = `https://images.weserv.nl/?url=${item}`
+											}
+											return item
+										})
+									}
+								}
+								this.formData = tempData
 							} else {
 								uni.showModal({
 									content: '未获取到书本信息',

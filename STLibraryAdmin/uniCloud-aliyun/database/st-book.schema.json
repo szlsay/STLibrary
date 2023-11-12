@@ -56,7 +56,8 @@
 			"label": "ISBN"
 		},
 		"pictures": {
-			"bsonType": "string",
+			"bsonType": "array",
+			"arrayType": "string",
 			"description": "请输入图片",
 			"label": "图片"
 		},

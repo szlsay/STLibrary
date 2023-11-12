@@ -2,6 +2,25 @@
 
 
 const validator = {
+  "isisbn": {
+    "rules": [
+      {
+        "format": "bool"
+      }
+    ],
+    "label": "是否通过isbn方式"
+  },
+  "images": {
+    "rules": [
+      {
+        "format": "array"
+      },
+      {
+        "arrayType": "file"
+      }
+    ],
+    "label": "图片"
+  },
   "author": {
     "rules": [
       {
@@ -50,26 +69,13 @@ const validator = {
     ],
     "label": "ISBN"
   },
-  "language": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "label": "语言"
-  },
-  "pages": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "label": "页数"
-  },
   "pictures": {
     "rules": [
       {
-        "format": "string"
+        "format": "array"
+      },
+      {
+        "arrayType": "string"
       }
     ],
     "label": "图片"
@@ -97,22 +103,6 @@ const validator = {
       }
     ],
     "label": "出版地址"
-  },
-  "price": {
-    "rules": [
-      {
-        "format": "double"
-      }
-    ],
-    "label": "价格"
-  },
-  "words": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "label": "字数"
   }
 }
 
