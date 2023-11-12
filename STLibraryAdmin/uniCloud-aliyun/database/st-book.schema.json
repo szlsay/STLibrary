@@ -12,6 +12,19 @@
 		"_id": {
 			"description": "ID，系统自动生成"
 		},
+		"isisbn": {
+			"bsonType": "bool",
+			"description": "是否通过isbn方式",
+			"label": "是否通过isbn方式"
+		},
+		"images": {
+			"bsonType": "array",
+			"arrayType": "file",
+			"fileMediaType": "image",
+			"fileExtName": "jpg,png,webp,jpeg",
+			"description": "请选择图片",
+			"label": "图片"
+		},
 		"author": {
 			"bsonType": "string",
 			"description": "请输入作者",
@@ -42,16 +55,6 @@
 			"description": "请输入ISBN",
 			"label": "ISBN"
 		},
-		"language": {
-			"bsonType": "string",
-			"description": "请输入语言",
-			"label": "语言"
-		},
-		"pages": {
-			"bsonType": "string",
-			"description": "请输入页数",
-			"label": "页数"
-		},
 		"pictures": {
 			"bsonType": "string",
 			"description": "请输入图片",
@@ -71,16 +74,6 @@
 			"bsonType": "string",
 			"description": "请输入出版地址",
 			"label": "出版地址"
-		},
-		"price": {
-			"bsonType": "double",
-			"description": "请输入价格",
-			"label": "价格"
-		},
-		"words": {
-			"bsonType": "string",
-			"description": "请输入字数",
-			"label": "字数"
 		}
 	}
 }

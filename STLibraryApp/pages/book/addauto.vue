@@ -41,7 +41,8 @@
 					<uni-easyinput placeholder="请输入出版地址" v-model="formData.pressPlace" disabled></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="pictures" label="图片">
-					<uni-easyinput placeholder="请输入图片" v-model="formData.pictures" disabled></uni-easyinput>
+					<image v-for="(url, index) in getImageUrls(formData.pictures)" :key="index" :src="url" mode="aspectFill"
+						@tap.native.stop="onClickPreview(url)"></image>
 				</uni-forms-item>
 				<view class="uni-button-group">
 					<button type="primary" class="uni-button" @click="submit">提交</button>
@@ -84,7 +85,7 @@
 				"pressPlace": "",
 			}
 			return {
-				isbn: '9787557010539',
+				isbn: '',
 				formData,
 				formOptions: {},
 				rules: {
@@ -94,9 +95,25 @@
 		},
 		onReady() {
 			this.$refs.form.setRules(this.rules)
-			this.getDetail()
+			// this.getDetail()
 		},
 		methods: {
+			getImageUrls(value) {
+				if (value) {
+					const result = JSON.parse(value);
+					if (result && Array.isArray(result) && result.length > 0) {
+						return result
+					}
+				}
+				return []
+			},
+			onClickPreview(url) {
+				event.preventDefault()
+				uni.previewImage({
+					urls: [url],
+					current: 0
+				});
+			},
 			submit() {
 				uni.showLoading({
 					mask: true
@@ -177,6 +194,14 @@
 </script>
 
 <style lang="scss" scoped>
+	image {
+		width: 136rpx;
+		height: 136rpx;
+		border-radius: 8rpx;
+		background-color: #00CC99;
+		margin-right: 20rpx;
+	}
+
 	.book-box {
 		display: flex;
 	}
