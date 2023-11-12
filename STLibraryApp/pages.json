@@ -8,7 +8,7 @@
 	}, {
 		"path": "pages/book/list",
 		"style": {
-			"navigationBarTitleText": "列表"
+			"navigationBarTitleText": "书籍列表"
 		}
 	}, {
 		"path": "pages/book/add",

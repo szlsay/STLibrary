@@ -55,7 +55,7 @@
 <script>
 	import {
 		validator
-	} from '../../js_sdk/validator/st-book.js';
+	} from '@/js_sdk/validator/st-book.js';
 
 	const db = uniCloud.database();
 	const dbCollectionName = 'st-book';

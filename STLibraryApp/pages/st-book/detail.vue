@@ -68,7 +68,7 @@
 
 <script>
   // 由schema2code生成，包含校验规则和enum静态数据
-  import { enumConverter } from '../../js_sdk/validator/st-book.js'
+  import { enumConverter } from '@/js_sdk/validator/st-book.js'
   const db = uniCloud.database()
 
   export default {

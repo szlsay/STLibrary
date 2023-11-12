@@ -1,72 +1,88 @@
 <template>
-  <view class="container">
-    <unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList" field="author,bookDesc,bookName,clcCode,clcName,isbn,language,pages,pictures,press,pressDate,pressPlace,price,words">
-      <view v-if="error">{{error.message}}</view>
-      <view v-else-if="data">
-        <uni-list>
-          <uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true" @click="handleItemClick(item._id)">
-            <template v-slot:body>
-              <text>
-                <!-- 此处默认显示为_id，请根据需要自行修改为其他字段 -->
-                <!-- 如果使用了联表查询，请参考生成的 admin 项目中 list.vue 页面 -->
-                {{item._id}}
-              </text>
-            </template>
-          </uni-list-item>
-        </uni-list>
-      </view>
-      <uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
-    </unicloud-db>
-    <uni-fab ref="fab" horizontal="right" vertical="bottom" :pop-menu="false" @fabClick="fabClick" />
-  </view>
+	<view class="page">
+		<unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList"
+			field="isisbn,images,bookName,pictures">
+			<view v-if="error">{{error.message}}</view>
+			<view v-else-if="data">
+				<uni-list>
+					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
+						@click="handleItemClick(item._id)">
+						<template v-slot:body>
+							<view>
+								<view class="book-box" v-if="item.isisbn">
+									<image v-for="(url, index) in item.pictures" :key="index" :src="url" mode="aspectFill"
+										@tap.native.stop="onClickPreview(url)"></image>
+									<text>{{item.bookName}}</text>
+								</view>
+								<view class="book-box" v-else>
+									<image v-for="(img, index) in item.images" :key="index" :src="img.url" mode="aspectFill"
+										@tap.native.stop="onClickPreview(img.url)"></image>
+									<text>{{item.bookName}}</text>
+								</view>
+							</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</view>
+			<uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
+		</unicloud-db>
+	</view>
 </template>
 
 <script>
-  const db = uniCloud.database()
-  export default {
-    data() {
-      return {
-        collectionList: "st-book",
-        loadMore: {
-          contentdown: '',
-          contentrefresh: '',
-          contentnomore: ''
-        }
-      }
-    },
-    onPullDownRefresh() {
-      this.$refs.udb.loadData({
-        clear: true
-      }, () => {
-        uni.stopPullDownRefresh()
-      })
-    },
-    onReachBottom() {
-      this.$refs.udb.loadMore()
-    },
-    methods: {
-      handleItemClick(id) {
-        uni.navigateTo({
-          url: './detail?id=' + id
-        })
-      },
-      fabClick() {
-        // 打开新增页面
-        uni.navigateTo({
-          url: './add',
-          events: {
-            // 监听新增数据成功后, 刷新当前页面数据
-            refreshData: () => {
-              this.$refs.udb.loadData({
-                clear: true
-              })
-            }
-          }
-        })
-      }
-    }
-  }
+	const db = uniCloud.database()
+	export default {
+		data() {
+			return {
+				collectionList: "st-book",
+				loadMore: {
+					contentdown: '',
+					contentrefresh: '',
+					contentnomore: ''
+				}
+			}
+		},
+		onPullDownRefresh() {
+			this.$refs.udb.loadData({
+				clear: true
+			}, () => {
+				uni.stopPullDownRefresh()
+			})
+		},
+		onReachBottom() {
+			this.$refs.udb.loadMore()
+		},
+		methods: {
+			onClickPreview(url) {
+				event.preventDefault()
+				uni.previewImage({
+					urls: [url],
+					current: 0
+				});
+			},
+			handleItemClick(id) {
+				uni.navigateTo({
+					url: './detail?id=' + id
+				})
+			}
+		}
+	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	image {
+		width: 136rpx;
+		height: 136rpx;
+		border-radius: 8rpx;
+		background-color: #00CC99;
+		margin-right: 20rpx;
+	}
+
+	.book-box {
+		display: flex;
+	}
+
+	.page {
+		padding: 16rpx;
+	}
 </style>
