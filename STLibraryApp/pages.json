@@ -13,7 +13,7 @@
 	}, {
 		"path": "pages/book/add",
 		"style": {
-			"navigationBarTitleText": "新增"
+			"navigationBarTitleText": "手动新增"
 		}
 	}, {
 		"path": "pages/book/addauto",
