@@ -8,48 +8,40 @@
 
 		</view>
 		<view class="page-result" v-if="formData">
-			<uni-forms ref="form" :model="formData" validate-trigger="submit" err-show-type="toast">
+			<uni-forms ref="form" :model="formData" validate-trigger="submit" err-show-type="toast" :label-width='40'>
 				<uni-forms-item name="isbn" label="ISBN">
 					<uni-easyinput placeholder="请输入ISBN" v-model="formData.isbn" disabled></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="bookName" label="书名">
-					<uni-easyinput placeholder="请输入书名" v-model="formData.bookName" disabled></uni-easyinput>
+					<uni-easyinput type="textarea" placeholder="请输入书名" v-model="formData.bookName" disabled></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="author" label="作者">
 					<uni-easyinput placeholder="请输入作者" v-model="formData.author" disabled></uni-easyinput>
 				</uni-forms-item>
-				<uni-forms-item name="bookDesc" label="内容介绍">
-					<uni-easyinput placeholder="请输入内容介绍" v-model="formData.bookDesc" disabled></uni-easyinput>
+				<uni-forms-item name="bookDesc" label="介绍">
+					<uni-easyinput type="textarea" placeholder="请输入内容介绍" v-model="formData.bookDesc" disabled></uni-easyinput>
 				</uni-forms-item>
-				<uni-forms-item name="clcCode" label="类型编码">
-					<uni-easyinput placeholder="请输入类型编码" v-model="formData.clcCode" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="clcName" label="类型名称">
-					<uni-easyinput placeholder="请输入类型名称" v-model="formData.clcName" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="language" label="语言">
-					<uni-easyinput placeholder="请输入语言" v-model="formData.language" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="pages" label="页数">
-					<uni-easyinput placeholder="请输入页数" v-model="formData.pages" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="pictures" label="图片">
-					<uni-easyinput placeholder="请输入图片" v-model="formData.pictures" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="press" label="出版社">
-					<uni-easyinput placeholder="请输入出版社" v-model="formData.press" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="pressDate" label="出版时间">
-					<uni-easyinput placeholder="请输入出版时间" v-model="formData.pressDate" disabled></uni-easyinput>
-				</uni-forms-item>
+				<view class="book-box">
+					<uni-forms-item name="clcCode" label="类型" style="width: 300rpx;">
+						<uni-easyinput placeholder="请输入类型编码" v-model="formData.clcCode" disabled></uni-easyinput>
+					</uni-forms-item>
+					<uni-forms-item name="clcName" style="flex: 1; margin-left: -60rpx;">
+						<uni-easyinput placeholder="请输入类型名称" v-model="formData.clcName" disabled></uni-easyinput>
+					</uni-forms-item>
+				</view>
+				<view class="book-box">
+					<uni-forms-item name="press" label="出版社" style="width: 300rpx;">
+						<uni-easyinput placeholder="请输入出版社" v-model="formData.press" disabled></uni-easyinput>
+					</uni-forms-item>
+					<uni-forms-item name="pressDate" style="flex: 1; margin-left: -60rpx;">
+						<uni-easyinput placeholder="请输入出版时间" v-model="formData.pressDate" disabled></uni-easyinput>
+					</uni-forms-item>
+				</view>
 				<uni-forms-item name="pressPlace" label="出版地址">
 					<uni-easyinput placeholder="请输入出版地址" v-model="formData.pressPlace" disabled></uni-easyinput>
 				</uni-forms-item>
-				<uni-forms-item name="price" label="价格">
-					<uni-easyinput placeholder="请输入价格" type="number" v-model="formData.price" disabled></uni-easyinput>
-				</uni-forms-item>
-				<uni-forms-item name="words" label="字数">
-					<uni-easyinput placeholder="请输入字数" v-model="formData.words" disabled></uni-easyinput>
+				<uni-forms-item name="pictures" label="图片">
+					<uni-easyinput placeholder="请输入图片" v-model="formData.pictures" disabled></uni-easyinput>
 				</uni-forms-item>
 				<view class="uni-button-group">
 					<button type="primary" class="uni-button" @click="submit">提交</button>
@@ -86,17 +78,13 @@
 				"clcCode": "",
 				"clcName": "",
 				"isbn": "",
-				"language": "",
-				"pages": "",
 				"pictures": "",
 				"press": "",
 				"pressDate": "",
 				"pressPlace": "",
-				"price": null,
-				"words": ""
 			}
 			return {
-				isbn: null,
+				isbn: '9787557010539',
 				formData,
 				formOptions: {},
 				rules: {
@@ -106,6 +94,7 @@
 		},
 		onReady() {
 			this.$refs.form.setRules(this.rules)
+			this.getDetail()
 		},
 		methods: {
 			submit() {
@@ -116,6 +105,19 @@
 					return this.submitForm(res)
 				}).catch(() => {}).finally(() => {
 					uni.hideLoading()
+				})
+			},
+			getDetail() {
+				uniCloud.database().collection(dbCollectionName).where({
+					isbn: this.isbn
+				}).get({
+					getOne: true
+				}).then(res => {
+					const {
+						result
+					} = res
+					console.log(result)
+					this.formData = result.data
 				})
 			},
 			submitForm(value) {
@@ -175,12 +177,20 @@
 </script>
 
 <style lang="scss" scoped>
-	::v-deep .uni-modal__textarea {
-		font-size: 36rpx;
+	.book-box {
+		display: flex;
 	}
 
 	.page {
-		padding: 40rpx;
+		padding: 16rpx;
+	}
+
+	::v-deep .is-disabled {
+		color: black !important;
+	}
+
+	.uni-forms-item {
+		margin-bottom: 8px;
 	}
 
 	.input-code {
@@ -196,42 +206,5 @@
 			align-items: center;
 			background-color: #00cc99;
 		}
-	}
-
-	.uni-container {
-		padding: 15px;
-	}
-
-	.uni-input-border,
-	.uni-textarea-border {
-		width: 100%;
-		font-size: 14px;
-		color: #666;
-		border: 1px #e5e5e5 solid;
-		border-radius: 5px;
-		box-sizing: border-box;
-	}
-
-	.uni-input-border {
-		padding: 0 10px;
-		height: 35px;
-
-	}
-
-	.uni-textarea-border {
-		padding: 10px;
-		height: 80px;
-	}
-
-	.uni-button-group {
-		margin-top: 50px;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		justify-content: center;
-	}
-
-	.uni-button {
-		width: 184px;
 	}
 </style>
