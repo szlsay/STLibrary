@@ -11,6 +11,17 @@
 				</view>
 			</view>
 		</view>
+		<view class="st-box" v-if="menusQuery && menusQuery.length > 0">
+			<view class="title">
+				查询书籍
+			</view>
+			<view class="list">
+				<view class="item" v-for="(item, index) in menusQuery" :key="index" @click="onClickItem(item)">
+					<image :src="item.img"></image>
+					<text class="text">{{item.text}}</text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -21,11 +32,22 @@
 	export default {
 		data() {
 			return {
+				menusQuery: [{
+					"img": "/static/home/book-query.png",
+					"text": "书籍列表",
+					"to": "/pages/book/list",
+				}],
 				menusInput: [{
-					"img": "/static/home/book-add.png",
-					"text": "添加书籍",
-					"to": "/pages/book/addauto",
-				}]
+						"img": "/static/home/book-isbn.png",
+						"text": "ISBN",
+						"to": "/pages/book/addauto",
+					},
+					{
+						"img": "/static/home/book-add.png",
+						"text": "手动填写",
+						"to": "/pages/book/add",
+					}
+				]
 			}
 		},
 		methods: {
