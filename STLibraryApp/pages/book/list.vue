@@ -5,15 +5,16 @@
 			<view v-if="error">{{error.message}}</view>
 			<view v-else-if="data">
 				<uni-list>
-					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true">
+					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
+						@click="handleItemClick(item)">
 						<template v-slot:body>
 							<view>
-								<view class="book-box" v-if="item.isisbn" @click="handleItemClick(item._id)">
+								<view class="book-box" v-if="item.isisbn">
 									<image v-for="(url, index) in item.pictures" :key="index" :src="url" mode="aspectFill"
 										@tap.native.stop="onClickPreview(url)"></image>
 									<text>{{item.bookName}}</text>
 								</view>
-								<view class="book-box" v-else @click="handleItemClickBook(item._id)">
+								<view class="book-box" v-else>
 									<image v-for="(img, index) in item.images" :key="index" :src="img.url" mode="aspectFill"
 										@tap.native.stop="onClickPreview(img.url)"></image>
 									<text>{{item.bookName}}</text>
@@ -59,15 +60,16 @@
 					current: 0
 				});
 			},
-			handleItemClick(id) {
-				uni.navigateTo({
-					url: './detail?id=' + id
-				})
-			},
-			handleItemClickBook(id) {
-				uni.navigateTo({
-					url: './detailbook?id=' + id
-				})
+			handleItemClick(item) {
+				if (item.isisbn) {
+					uni.navigateTo({
+						url: './detail?id=' + item._id
+					})
+				} else {
+					uni.navigateTo({
+						url: './detailbook?id=' + item._id
+					})
+				}
 			}
 		}
 	}
@@ -83,6 +85,8 @@
 	}
 
 	.book-box {
+		width: 100%;
+		background-color: red;
 		display: flex;
 	}
 

@@ -25,9 +25,9 @@
 					<text class="title">出版时间：</text>
 					<text class="content">{{data.pressDate}}</text>
 				</view>
+				<button type="warn" class="btn-delete" @click="handleDelete">删除</button>
 			</view>
 		</unicloud-db>
-		<button type="warn" class="btn-delete" @click="handleDelete">删除</button>
 	</view>
 </template>
 
