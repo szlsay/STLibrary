@@ -2,7 +2,7 @@
 	<view class="page">
 		<uni-forms ref="form" :model="formData" validate-trigger="submit" err-show-type="toast">
 			<uni-forms-item name="isbn" label="ISBN">
-				<uni-easyinput placeholder="请输入ISBN" v-model="formData.isbn"></uni-easyinput>
+				<uni-easyinput placeholder="请输入ISBN" v-model="formData.isbn" maxlength="13" trim="both"></uni-easyinput>
 			</uni-forms-item>
 			<uni-forms-item name="bookName" label="书名">
 				<uni-easyinput placeholder="请输入书名" v-model="formData.bookName"></uni-easyinput>
