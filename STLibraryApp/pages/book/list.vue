@@ -86,7 +86,6 @@
 
 	.book-box {
 		width: 100%;
-		background-color: red;
 		display: flex;
 	}
 
