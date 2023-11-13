@@ -105,7 +105,7 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .uni-container {
     padding: 15px;
   }

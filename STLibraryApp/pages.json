@@ -24,7 +24,7 @@
 		"path": "pages/book/edit",
 		"style": {
 			"navigationBarTitleText": "编辑"
-		},
+		}
 	}, {
 		"path": "pages/book/detailbook",
 		"style": {

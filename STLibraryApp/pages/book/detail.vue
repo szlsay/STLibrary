@@ -81,7 +81,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	
 	.btn-delete{
 		margin-top: 40rpx;

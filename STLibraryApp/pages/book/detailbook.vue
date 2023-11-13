@@ -88,9 +88,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
   .btns {
-    margin-top: 400px;
+    margin-top: 40px;
     display: flex;
     flex-direction: row;
   }
