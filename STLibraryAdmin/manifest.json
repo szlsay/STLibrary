@@ -71,8 +71,8 @@
     "h5" : {
         "template" : "template.h5.html",
         "router" : {
-            "mode" : "hash",
-            "base" : "/stlibraryadmin"
+            "mode" : "history",
+            "base" : "/stlibraryadmin/"
         }
     },
     "vueVersion" : "3",

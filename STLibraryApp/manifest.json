@@ -70,7 +70,8 @@
     "vueVersion" : "3",
     "h5" : {
         "router" : {
-            "base" : "/stlibraryapp/"
+            "base" : "/stlibraryapp/",
+            "mode" : "history"
         },
         "devServer" : {
             "https" : false
