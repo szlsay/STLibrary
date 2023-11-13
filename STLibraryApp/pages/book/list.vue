@@ -5,16 +5,15 @@
 			<view v-if="error">{{error.message}}</view>
 			<view v-else-if="data">
 				<uni-list>
-					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
-						@click="handleItemClick(item._id)">
+					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true">
 						<template v-slot:body>
 							<view>
-								<view class="book-box" v-if="item.isisbn">
+								<view class="book-box" v-if="item.isisbn" @click="handleItemClick(item._id)">
 									<image v-for="(url, index) in item.pictures" :key="index" :src="url" mode="aspectFill"
 										@tap.native.stop="onClickPreview(url)"></image>
 									<text>{{item.bookName}}</text>
 								</view>
-								<view class="book-box" v-else>
+								<view class="book-box" v-else @click="handleItemClickBook(item._id)">
 									<image v-for="(img, index) in item.images" :key="index" :src="img.url" mode="aspectFill"
 										@tap.native.stop="onClickPreview(img.url)"></image>
 									<text>{{item.bookName}}</text>
@@ -63,6 +62,11 @@
 			handleItemClick(id) {
 				uni.navigateTo({
 					url: './detail?id=' + id
+				})
+			},
+			handleItemClickBook(id) {
+				uni.navigateTo({
+					url: './detailbook?id=' + id
 				})
 			}
 		}

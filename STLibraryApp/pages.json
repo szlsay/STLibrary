@@ -24,6 +24,11 @@
 		"path": "pages/book/edit",
 		"style": {
 			"navigationBarTitleText": "编辑"
+		},
+	}, {
+		"path": "pages/book/detailbook",
+		"style": {
+			"navigationBarTitleText": "详情"
 		}
 	}, {
 		"path": "pages/book/detail",

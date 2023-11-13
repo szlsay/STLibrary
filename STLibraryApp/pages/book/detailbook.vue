@@ -1,33 +1,25 @@
 <template>
 	<view class="container">
 		<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="options"
-			:collection="collectionList" field="author,bookDesc,bookName,isbn,pictures,press,pressDate" :where="queryWhere"
-			:getone="true" :manual="true">
+			:collection="collectionList" field="images,bookName,isbn" :where="queryWhere" :getone="true" :manual="true">
 			<view v-if="error">{{error.message}}</view>
 			<view v-else-if="loading">
 				<uni-load-more :contentText="loadMore" status="loading"></uni-load-more>
 			</view>
 			<view v-else-if="data">
-				<image v-for="(url, index) in data.pictures" :key="index" :src="url" mode="aspectFill"
-					@tap.native.stop="onClickPreview(url)"></image>
+				<image v-for="(img, index) in data.images" :key="index" :src="img.url" mode="aspectFill"
+					@tap.native.stop="onClickPreview(img.url)"></image>
 				<view class="book-name">{{data.bookName}}</view>
-				<view class="book-author">{{data.author}}</view>
-				<view class="book-desc">{{data.bookDesc}}</view>
 				<view class="book-box">
 					<text class="title">ISBN：</text>
 					<text class="content">{{data.isbn}}</text>
 				</view>
-				<view class="book-box">
-					<text class="title">出版社：</text>
-					<text class="content">{{data.press}}</text>
-				</view>
-				<view class="book-box">
-					<text class="title">出版时间：</text>
-					<text class="content">{{data.pressDate}}</text>
-				</view>
 			</view>
 		</unicloud-db>
-		<button type="warn" class="btn-delete" @click="handleDelete">删除</button>
+		<view class="btns">
+			<button type="primary" @click="handleUpdate">修改</button>
+			<button type="warn" class="btn-delete" @click="handleDelete">删除</button>
+		</view>
 	</view>
 </template>
 
@@ -68,9 +60,24 @@
 					current: 0
 				});
 			},
+			handleUpdate() {
+				// 打开修改页面
+				uni.navigateTo({
+					url: './edit?id=' + this._id,
+					events: {
+						// 监听修改页面成功修改数据后, 刷新当前页面数据
+						refreshData: () => {
+							this.$refs.udb.loadData({
+								clear: true
+							})
+						}
+					}
+				})
+			},
 			handleDelete() {
 				this.$refs.udb.remove(this._id, {
 					success: (res) => {
+						// 删除数据成功后跳转到list页面
 						uni.navigateTo({
 							url: './list'
 						})
@@ -82,11 +89,20 @@
 </script>
 
 <style>
-	
-	.btn-delete{
-		margin-top: 40rpx;
-		width: 50%;
-	}
+  .btns {
+    margin-top: 400px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .btns button {
+    flex: 1;
+  }
+
+  .btn-delete {
+    margin-left: 10px;
+  }
+
 	.container {
 		padding: 32rpx;
 	}
