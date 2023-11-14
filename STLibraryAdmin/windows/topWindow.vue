@@ -14,7 +14,8 @@
 			<view class="navbar-left">
 				<view class="logo pointer" @click="linkTo">
 					<image class="logo-image" :src="logo" mode="heightFix"></image>
-					<text class="logo-text">{{appName}}</text>
+					<!-- <text class="logo-text">{{appName}}</text> -->
+					<text class="logo-text">新媛图书馆</text>
 				</view>
 				<uni-icons @click="toggleSidebar" type="bars" class="menu-icon" size="30" color="#999"></uni-icons>
 			</view>
