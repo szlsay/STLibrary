@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/home/home",
 		"style": {
-			"navigationBarTitleText": "首页",
+			"navigationBarTitleText": "新媛图书馆",
 			"enablePullDownRefresh": false
 		}
 	}, {
