@@ -138,33 +138,29 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTitleText": "设置密码"
 			}
+		}, {
+			"path": "uni_modules/uni-id-pages/pages/userinfo/realname-verify/realname-verify",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "实名认证"
+			}
+		}, {
+			"path": "pages/book/add",
+			"style": {
+				"navigationBarTitleText": "新增图书"
+			}
+		}, {
+			"path": "pages/book/edit",
+			"style": {
+				"navigationBarTitleText": "编辑图书"
+			}
+		}, {
+			"path": "pages/book/list",
+			"style": {
+				"navigationBarTitleText": "图书列表"
+			}
 		}
-	,{
-    "path": "uni_modules/uni-id-pages/pages/userinfo/realname-verify/realname-verify",
-    "style": {
-        "enablePullDownRefresh": false,
-        "navigationBarTitleText": "实名认证"
-    }
-}
-,{
-    "path": "pages/st-book/add",
-    "style": {
-        "navigationBarTitleText": "新增"
-    }
-}
-,{
-    "path": "pages/st-book/edit",
-    "style": {
-        "navigationBarTitleText": "编辑"
-    }
-}
-,{
-    "path": "pages/st-book/list",
-    "style": {
-        "navigationBarTitleText": "列表"
-    }
-}
-],
+	],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
